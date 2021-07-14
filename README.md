@@ -76,12 +76,12 @@ You can obtain an authorization code with this library:
 
 ```ruby
 authenticator = DropboxApi::Authenticator.new(CLIENT_ID, CLIENT_SECRET)
-authenticator.authorize_url #=> "https://www.dropbox.com/..."
+authenticator.auth_code.authorize_url #=> "https://www.dropbox.com/..."
 
 # Now you need to open the authorization URL in your browser,
 # authorize the application and copy your code.
 
-auth_bearer = authenticator.get_token(CODE) #=> #<OAuth2::AccessToken ...>`
+auth_bearer = authenticator.auth_code.get_token(CODE) #=> #<OAuth2::AccessToken ...>`
 auth_bearer.token #=> "VofXAX8D..."
 # Keep this token, you'll need it to initialize a `DropboxApi::Client` object
 ```
@@ -130,7 +130,7 @@ In case of use of Authenticator approach, following change has to be applied:
 authenticator = DropboxApi::Authenticator.new(CLIENT_ID, CLIENT_SECRET)
 
 # Change 1: ask for offline token type:
-authenticator.authorize_url(token_access_type: 'offline') #=> "https://www.dropbox.com/..." 
+authenticator.auth_code.authorize_url(token_access_type: 'offline') #=> "https://www.dropbox.com/..." 
 
 # Now you need to open the authorization URL in your browser,
 # authorize the application and copy your code.
@@ -141,7 +141,7 @@ token = MyDropboxToken.from_code(authenticator, CODE)  #=> #<DropboxApi::Token .
 token.save! 
 ```
 
-#### Using token performin API calls
+#### Using token performing API calls
 
 ```ruby
 authenticator = DropboxApi::Authenticator.new(DROPBOX_APP_KEY, DROPBOX_APP_SECRET)
