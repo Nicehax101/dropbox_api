@@ -116,7 +116,7 @@ Furthermore overriding the class on your own and implement `save_token` method a
 class MyDropboxToken < DropboxApi::Token
   def save_token(token)
     # Implement your own store method, token is a `Hash` instance in here, easy to serialize:
-    puts 'Token to be saved somwhere in the database', token
+    puts 'Token to be saved somewhere in the database', token
   end
 end
 ```
