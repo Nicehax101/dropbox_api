@@ -20,8 +20,8 @@ module DropboxApi
       load_token(token_hash) if token_hash
     end
     
-    def self.from_code(authenticator, code) 
-      self.new(authenticator, authenticator.auth_code.get_token(code))
+    def self.from_code(authenticator, code, redirect_uri: nil) 
+      self.new(authenticator, authenticator.auth_code.get_token(code, redirect_uri: redirect_uri))
     end
     
     def load_token(token_hash) 
